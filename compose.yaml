@@ -8,6 +8,18 @@ services:
       MARIADB_PASSWORD: testpass
     volumes:
       - db-data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: testuser
+      PMA_PASSWORD: testpass
+    ports:
+      - "8081:80"
+    volumes:
+      - phpmyadmin-data:/sessions
   php:
     build: .
     depends_on:
@@ -18,3 +30,4 @@ services:
       - ./practice:/var/www/html
 volumes:
   db-data:
+  phpmyadmin-data:
