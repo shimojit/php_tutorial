@@ -28,6 +28,18 @@ services:
       - "8080:80"
     volumes:
       - ./practice:/var/www/html
+    networks:
+      - br0
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - br0
 volumes:
   db-data:
   phpmyadmin-data:
+networks:
+  br0:
+    driver: bridge
